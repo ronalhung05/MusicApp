@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/define_dimen_10"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/define_dimen_14">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/define_dimen_120"
+            android:layout_height="@dimen/define_dimen_120"
+            android:src="@drawable/img_splash" />
+
+        <TextView
+            android:id="@+id/tv_about_us_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_10"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_xnormal" />
+
+        <TextView
+            android:id="@+id/tv_about_us_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_10"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_small" />
+
+        <LinearLayout
+            android:id="@+id/layout_website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_10"
+            android:padding="@dimen/define_dimen_2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_about_us_website"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_small" />
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/blue"
+                android:layout_height="1dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/define_dimen_14"
+        android:layout_marginStart="@dimen/define_dimen_14"/>
+</LinearLayout>

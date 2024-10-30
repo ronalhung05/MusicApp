@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/define_dimen_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/feedback_name"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_5"
+            android:background="@drawable/bg_white_shape_border_color_main"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:padding="@dimen/define_dimen_12"
+            android:textSize="@dimen/text_size_small"
+            tools:ignore="Autofill,LabelFor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_16"
+            android:text="@string/feedback_phone"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_5"
+            android:background="@drawable/bg_white_shape_border_color_main"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:padding="@dimen/define_dimen_12"
+            android:textSize="@dimen/text_size_small"
+            tools:ignore="Autofill,LabelFor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_16"
+            android:text="@string/feedback_email"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_5"
+            android:background="@drawable/bg_white_shape_border_color_main"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:enabled="false"
+            android:focusable="false"
+            android:padding="@dimen/define_dimen_12"
+            android:textSize="@dimen/text_size_small"
+            tools:ignore="Autofill,LabelFor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_16"
+            android:text="@string/feedback_comment"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_comment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/define_dimen_80"
+            android:layout_marginTop="@dimen/define_dimen_5"
+            android:background="@drawable/bg_white_shape_border_color_main"
+            android:gravity="start"
+            android:imeOptions="actionDone"
+            android:maxLength="1000"
+            android:inputType="textMultiLine"
+            android:padding="@dimen/define_dimen_12"
+            android:textSize="@dimen/text_size_small"
+            tools:ignore="Autofill,LabelFor" />
+
+        <TextView
+            android:id="@+id/tv_send_feedback"
+            android:layout_width="@dimen/define_dimen_200"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_main_shape_corner_6"
+            android:gravity="center"
+            android:padding="@dimen/define_dimen_12"
+            android:text="@string/send_feedback"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal" />
+    </LinearLayout>
+</ScrollView>
+

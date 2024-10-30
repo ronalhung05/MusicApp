@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/define_dimen_5"
+        android:layout_toStartOf="@+id/layout_button"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_song_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_previous"
+            android:layout_width="@dimen/define_dimen_24"
+            android:layout_height="@dimen/define_dimen_24"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:src="@drawable/ic_previous_gray"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/img_play"
+            android:layout_width="@dimen/define_dimen_30"
+            android:layout_height="@dimen/define_dimen_30"
+            android:layout_marginStart="@dimen/define_dimen_10"
+            android:layout_marginEnd="@dimen/define_dimen_10"
+            android:src="@drawable/ic_play_gray"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/img_next"
+            android:layout_width="@dimen/define_dimen_24"
+            android:layout_height="@dimen/define_dimen_24"
+            android:layout_marginEnd="@dimen/define_dimen_14"
+            android:src="@drawable/ic_next_gray"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/img_close"
+            android:layout_width="@dimen/define_dimen_24"
+            android:layout_height="@dimen/define_dimen_24"
+            android:src="@drawable/ic_close_gray"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+</RelativeLayout>

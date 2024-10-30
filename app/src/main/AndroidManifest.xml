@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.pro.music">
+
+    <uses-configuration android:name="android.permission.INTERNET" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="31">
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_small_push_notification" />
+
+        <service
+            android:name="com.pro.music.service.MusicService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false" />
+
+        <receiver
+            android:name="com.pro.music.service.MusicReceiver"
+            android:exported="false" />
+
+        <activity
+            android:exported="true"
+            android:name="com.pro.music.activity.SplashActivity">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.MainActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.PlayMusicActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.SignInActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.SignUpActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.ForgotPasswordActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.AdminMainActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.AdminChangePasswordActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.AdminAddCategoryActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.AdminAddArtistActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.AdminAddSongActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.AdminCategorySongActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.AdminArtistSongActivity" />
+    </application>
+
+</manifest>

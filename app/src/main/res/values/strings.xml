@@ -1,0 +1,151 @@
+<resources>
+    <string name="app_name">Music Vip Java</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_category">Category</string>
+    <string name="menu_artist">Artist</string>
+
+    <string name="menu_all_songs">All Songs</string>
+    <string name="menu_popular_songs">Popular Songs</string>
+    <string name="menu_favorite_songs">Favorite Songs</string>
+
+    <string name="menu_feedback">Feedback</string>
+    <string name="menu_contact">Contact</string>
+
+    <string name="menu_account">Account</string>
+    <string name="menu_song">Song</string>
+
+    <string name="menu_change_password">Change password</string>
+    <string name="menu_sign_out">Sign Out</string>
+
+    <string name="label_facebook">Facebook</string>
+    <string name="label_call">Call Phone</string>
+    <string name="label_gmail">Gmail</string>
+    <string name="label_skype">Skype</string>
+    <string name="label_youtube">Youtube</string>
+    <string name="label_zalo">Zalo</string>
+
+    <string name="feedback_name">Full name (*)</string>
+    <string name="feedback_email">Email</string>
+    <string name="feedback_phone">Phone number</string>
+    <string name="feedback_comment">Comment (*)</string>
+    <string name="send_feedback">Send Feedback</string>
+
+    <string name="play_all">Play all</string>
+    <string name="view_all">View all</string>
+    <string name="music_player">Music Player</string>
+    <string name="views">Views</string>
+    <string name="label_start_time">00:00</string>
+    <string name="label_search">Search</string>
+    <string name="title_download">Download</string>
+    <string name="message_download">Download song…</string>
+    <string name="label_prioritized">Prioritized</string>
+
+    <string name="option_download">Download song</string>
+    <string name="option_priority">Priority</string>
+    <string name="option_add_playlist">Add to playlist</string>
+    <string name="option_remove_playlist">Remove from playlist</string>
+    <string name="option_view_artist">View artist</string>
+    <string name="option_view_category">View category</string>
+
+    // action
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_add">Add</string>
+    <string name="action_edit">Update</string>
+
+    // Validate
+    <string name="name_require">Please enter your name</string>
+    <string name="comment_require">Please enter your comment</string>
+
+    // Hint
+    <string name="hint_search_name">Song name…</string>
+    <string name="hint_search_category">Category name…</string>
+    <string name="hint_search_artist">Artist name…</string>
+
+    // Label
+    <string name="label_artist">Artist:</string>
+    <string name="label_listen">listen</string>
+    <string name="label_listens">listens</string>
+
+    // Message
+    <string name="msg_please_waiting">Please wait…</string>
+    <string name="msg_send_feedback_success">Send feedback successfully!</string>
+    <string name="msg_exit_app">Are you sure you want to exit?</string>
+    <string name="msg_get_date_error">General error, please try again later</string>
+
+    // Module user
+    <string name="hint_email">Email…</string>
+    <string name="hint_password">Password…</string>
+    <string name="hint_password_old">Old password…</string>
+    <string name="hint_password_new">New password…</string>
+    <string name="hint_password_confirm">Confirm new password…</string>
+
+    <string name="sign_up">Sign Up</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="have_not_account">Don\'t have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="change_password">Change password</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="reset_password">Reset password</string>
+    <string name="admin">Admin</string>
+    <string name="user">User</string>
+
+    <string name="label_name">Name(*)</string>
+    <string name="label_image">Image(*)</string>
+    <string name="label_add_category">Add Category</string>
+    <string name="label_update_category">Update Category</string>
+    <string name="label_add_artist">Add Artist</string>
+    <string name="label_update_artist">Update Artist</string>
+    <string name="label_add_song">Add Song</string>
+    <string name="label_update_song">Update Song</string>
+
+    <string name="song_category">Category(*)</string>
+    <string name="song_artist">Artist(*)</string>
+    <string name="song_link_url">Link url (.mp3)(*)</string>
+    <string name="song_featured">Featured</string>
+    <string name="label_featured">Featured:</string>
+    <string name="label_category">Category:</string>
+
+    <string name="msg_name_require">Please enter the name</string>
+    <string name="msg_image_require">Please enter the image</string>
+    <string name="msg_url_require">Please enter the url (.mp3)</string>
+    <string name="msg_edit_category_success">Update category successfully</string>
+    <string name="msg_add_category_success">Add category successfully</string>
+    <string name="msg_edit_artist_success">Update artist successfully</string>
+    <string name="msg_add_artist_success">Add artist successfully</string>
+    <string name="msg_edit_song_success">Update song successfully</string>
+    <string name="msg_add_song_success">Add song successfully</string>
+
+    <string name="msg_email_require">Please enter your email</string>
+    <string name="msg_password_require">Please enter your password</string>
+    <string name="msg_email_invalid">Your email is invalid</string>
+
+    <string name="msg_old_password_require">Please enter old password</string>
+    <string name="msg_new_password_require">Please enter new password</string>
+    <string name="msg_confirm_password_require">Please enter confirm new password</string>
+    <string name="msg_old_password_invalid">Old password is incorrect</string>
+    <string name="msg_confirm_password_invalid">Confirm new password does not match</string>
+    <string name="msg_new_password_invalid">The new password is the same as the old password</string>
+
+    <string name="msg_change_password_successfully">Change password successfully</string>
+    <string name="msg_reset_password_successfully">Password reset is successful, please check your email</string>
+
+    <string name="msg_sign_up_error">Registration failed, please try again</string>
+    <string name="msg_sign_in_error">Login failed, please try again</string>
+    <string name="msg_permission_denied">Permission Denied</string>
+    <string name="msg_add_song_playlist_success">Add song to playlist successfully</string>
+    <string name="msg_song_exists_in_playlist">The song already exists in the playlist</string>
+    <string name="msg_song_playing">The song is playing</string>
+    <string name="msg_setting_priority_successfully">Setting priority successfully</string>
+    <string name="msg_confirm_delete">Are you sure you want to delete this item?</string>
+    <string name="msg_delete_title">Confirm delete</string>
+    <string name="msg_cannot_delete_song">Cannot delete currently playing song from playlist</string>
+    <string name="msg_delete_song_from_playlist_success">Delete song from playlist successfully</string>
+    <string name="msg_email_invalid_admin">Email for administrator need to be in the format …@admin.com</string>
+    <string name="msg_email_invalid_user">Wrong email format for user</string>
+    <string name="msg_delete_category_successfully">Delete category successfully</string>
+    <string name="msg_delete_artist_successfully">Delete artist successfully</string>
+    <string name="msg_delete_song_successfully">Delete song successfully</string>
+</resources>

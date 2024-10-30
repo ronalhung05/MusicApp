@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription, Autofill, LabelFor">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/define_dimen_10">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/label_name"/>
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/define_dimen_4"
+                android:background="@drawable/bg_white_corner_6_border_gray"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:padding="@dimen/define_dimen_12"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_small"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:layout_marginTop="@dimen/define_dimen_10"
+                android:text="@string/song_category"/>
+
+            <Spinner
+                android:id="@+id/spn_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/define_dimen_4"
+                android:background="@color/transparent"
+                android:scrollbars="none" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:layout_marginTop="@dimen/define_dimen_10"
+                android:text="@string/song_artist"/>
+
+            <Spinner
+                android:id="@+id/spn_artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/define_dimen_4"
+                android:background="@color/transparent"
+                android:scrollbars="none" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:layout_marginTop="@dimen/define_dimen_10"
+                android:text="@string/label_image"/>
+
+            <EditText
+                android:id="@+id/edt_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/define_dimen_4"
+                android:background="@drawable/bg_white_corner_6_border_gray"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:padding="@dimen/define_dimen_12"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:layout_marginTop="@dimen/define_dimen_10"
+                android:text="@string/song_link_url"/>
+
+            <EditText
+                android:id="@+id/edt_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/define_dimen_4"
+                android:background="@drawable/bg_white_corner_6_border_gray"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:padding="@dimen/define_dimen_12"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_small" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/define_dimen_20"
+                android:background="@drawable/bg_white_corner_6_border_gray"
+                android:padding="@dimen/define_dimen_12">
+
+                <CheckBox
+                    android:id="@+id/chb_featured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/song_featured" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_add_or_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/define_dimen_20"
+                android:background="@drawable/bg_main_corner_30"
+                android:text="@string/action_add"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_small" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
