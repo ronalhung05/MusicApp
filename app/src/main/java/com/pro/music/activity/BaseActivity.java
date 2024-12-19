@@ -24,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .content(R.string.msg_please_waiting)
                 .progress(true, 0)
                 .build();
+        // thththththt
     }
 
     public void showProgressDialog(boolean value) {
