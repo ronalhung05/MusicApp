@@ -2,8 +2,9 @@ package com.pro.music.prefs;
 
 import android.content.Context;
 
+//Key, Value -> SharedPreferences refractor
 public class MySharedPreferences {
-    private static final String MOVIE_PRO_PREFERENCES = "MOVIE_PRO_PREFERENCES";
+    private static final String MOVIE_PRO_PREFERENCES = "MOVIE_PRO_PREFERENCES"; //file store ???
     private final Context mContext;
 
     public MySharedPreferences(Context mContext) {

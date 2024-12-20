@@ -95,6 +95,6 @@ public class SignInActivity extends BaseActivity {
         } else {
             GlobalFunction.startActivity(SignInActivity.this, MainActivity.class);
         }
-        finishAffinity();
+        finishAffinity(); //close all activities in the current task stack -> immediately close the app
     }
 }

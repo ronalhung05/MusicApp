@@ -60,7 +60,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
         }
         initControl();
         showInforSong();
-        updateStatusShuffleButton();
+        updateStatusShuffleButton(); //shuffle playlist
         updateStatusRepeatButton();
         mAction = MusicService.mAction;
         handleMusicAction();

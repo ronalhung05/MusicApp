@@ -60,6 +60,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         }
     }
 
+    //receive action from intent
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Bundle bundle = intent.getExtras();
@@ -77,6 +78,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         return START_NOT_STICKY;
     }
 
+    //handle action music
     private void handleActionMusic(int action) {
         switch (action) {
             case Constant.PLAY:
@@ -152,10 +154,10 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             newPosition = getPositionPriority();
         } else {
             if (mListSongPlaying.size() > 1) {
-                if (isShuffle) {
+                if (isShuffle) { //if shuffle
                     newPosition = new Random().nextInt(mListSongPlaying.size());
                 } else {
-                    if (isRepeat)
+                    if (isRepeat) //if repeat
                         newPosition = mSongPosition;
                     else if (mSongPosition > 0) {
                         newPosition = mSongPosition - 1;
@@ -199,7 +201,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         sendBroadcastChangeListener();
         playSong();
     }
-
+    //play the music with url mp3
     public void playMediaPlayer(String songUrl) {
         try {
             if (mPlayer.isPlaying()) {
@@ -262,7 +264,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             startForeground(1, notification);
         }
     }
-
+    //playlist management
     public static void clearListSongPlaying() {
         if (mListSongPlaying != null) {
             mListSongPlaying.clear();
@@ -320,13 +322,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             }
         }
     }
-
+    //play then next one when finish
     @Override
     public void onCompletion(MediaPlayer mp) {
         mAction = Constant.NEXT;
         nextSong();
     }
-
+    //starts playback when the MediaPlayer is ready
     @Override
     public void onPrepared(MediaPlayer mp) {
         mLengthSong = mPlayer.getDuration();

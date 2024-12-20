@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Music Vip Java</string>
+    <string name="app_name">Music App</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_category">Category</string>
@@ -126,6 +126,7 @@
     <string name="msg_new_password_require">Please enter new password</string>
     <string name="msg_confirm_password_require">Please enter confirm new password</string>
     <string name="msg_old_password_invalid">Old password is incorrect</string>
+    <string name="msg_min_length_pass_required">New password must have at least 6 characters</string>
     <string name="msg_confirm_password_invalid">Confirm new password does not match</string>
     <string name="msg_new_password_invalid">The new password is the same as the old password</string>
 

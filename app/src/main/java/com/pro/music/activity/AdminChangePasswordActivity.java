@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pro.music.R;
+import com.pro.music.constant.GlobalFunction;
 import com.pro.music.databinding.ActivityAdminChangePasswordBinding;
 import com.pro.music.model.User;
 import com.pro.music.prefs.DataStoreManager;
@@ -46,6 +47,9 @@ public class AdminChangePasswordActivity extends BaseActivity {
         } else if (!DataStoreManager.getUser().getPassword().equals(strOldPassword)) {
             Toast.makeText(this,
                     getString(R.string.msg_old_password_invalid), Toast.LENGTH_SHORT).show();
+        } else if (strNewPassword.length() < 6) {
+            Toast.makeText(this,
+                    getString(R.string.msg_min_length_pass_required), Toast.LENGTH_SHORT).show();
         } else if (!strNewPassword.equals(strConfirmPassword)) {
             Toast.makeText(this,
                     getString(R.string.msg_confirm_password_invalid), Toast.LENGTH_SHORT).show();
@@ -68,12 +72,22 @@ public class AdminChangePasswordActivity extends BaseActivity {
                         Toast.makeText(this,
                                 getString(R.string.msg_change_password_successfully),
                                 Toast.LENGTH_SHORT).show();
+
+                        //Update new info
                         User userLogin = DataStoreManager.getUser();
                         userLogin.setPassword(newPassword);
                         DataStoreManager.setUser(userLogin);
+
+                        //Clear fields
                         binding.edtOldPassword.setText("");
                         binding.edtNewPassword.setText("");
                         binding.edtConfirmPassword.setText("");
+
+                        //Change -> sign out after that
+//                        FirebaseAuth.getInstance().signOut();
+//                        DataStoreManager.setUser(null);
+//                        GlobalFunction.startActivity(this, SignInActivity.class);
+//                        finishAffinity();
                     }
                 });
     }

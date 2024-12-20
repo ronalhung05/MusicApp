@@ -9,8 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.pro.music.R;
 
+//basic UI for progress dialog and showing error message
 public abstract class BaseActivity extends AppCompatActivity {
-    protected MaterialDialog progressDialog, alertDialog;
+    protected MaterialDialog progressDialog, alertDialog; //api acts a loading indicator
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,7 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         createProgressDialog();
         createAlertDialog();
     }
-
+    //progress dialog -> loading state
     public void createProgressDialog() {
         progressDialog = new MaterialDialog.Builder(this)
                 .content(R.string.msg_please_waiting)
@@ -48,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             alertDialog.dismiss();
         }
     }
-
+    //alert dialog -> error state
     public void createAlertDialog() {
         alertDialog = new MaterialDialog.Builder(this)
                 .title(R.string.app_name)

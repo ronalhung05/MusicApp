@@ -10,7 +10,7 @@ import com.pro.music.constant.GlobalFunction;
 public class MusicReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        int action = intent.getExtras().getInt(Constant.MUSIC_ACTION);
-        GlobalFunction.startMusicService(context, action, MusicService.mSongPosition);
+        int action = intent.getExtras().getInt(Constant.MUSIC_ACTION);//retrieve
+        GlobalFunction.startMusicService(context, action, MusicService.mSongPosition);//send
     }
 }

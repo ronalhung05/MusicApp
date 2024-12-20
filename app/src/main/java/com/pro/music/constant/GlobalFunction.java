@@ -39,15 +39,17 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
+//Utility Class - static method used by all app - skype, fb, youtube...
 public class GlobalFunction {
 
+    //change from one to another
     public static void startActivity(Context context, Class<?> clz) {
         Intent intent = new Intent(context, clz);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); //delete activity on target screen and open in new task
         context.startActivity(intent);
     }
 
+    //change from on to another + data
     public static void startActivity(Context context, Class<?> clz, Bundle bundle) {
         Intent intent = new Intent(context, clz);
         intent.putExtras(bundle);
@@ -55,11 +57,13 @@ public class GlobalFunction {
         context.startActivity(intent);
     }
 
+    //hideSoftkeybard -> when finishing typing or cancel
     public static void hideSoftKeyboard(Activity activity) {
         try {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.
                     getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+            //Input manager includes soft keyboard -> get service that have manager soft keyboard
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);//hide
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
@@ -68,18 +72,19 @@ public class GlobalFunction {
     public static void onClickOpenGmail(Context context) {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", AboutUsConfig.GMAIL, null));
-        context.startActivity(Intent.createChooser(emailIntent, "Send Email"));
+        //second argument -> mailToAddress
+        context.startActivity(Intent.createChooser(emailIntent, "Send Email")); //box to create
     }
 
     public static void onClickOpenSkype(Context context) {
         try {
-            Uri skypeUri = Uri.parse("skype:" + AboutUsConfig.SKYPE_ID + "?chat");
+            Uri skypeUri = Uri.parse("skype:" + AboutUsConfig.SKYPE_ID + "?chat"); // open to chat
             context.getPackageManager().getPackageInfo("com.skype.raider", 0);
-            Intent skypeIntent = new Intent(Intent.ACTION_VIEW, skypeUri);
+            Intent skypeIntent = new Intent(Intent.ACTION_VIEW, skypeUri); //Action View -> open and display the content from URI
             skypeIntent.setComponent(new ComponentName("com.skype.raider", "com.skype.raider.Main"));
             context.startActivity(skypeIntent);
         } catch (Exception e) {
-            openSkypeWebview(context);
+            openSkypeWebview(context); //if not install -> do this method
         }
     }
 
@@ -102,6 +107,7 @@ public class GlobalFunction {
         try {
             String urlFacebook = AboutUsConfig.PAGE_FACEBOOK;
             PackageManager packageManager = context.getPackageManager();
+            //install/uninstall - check app - check permission
             int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
             if (versionCode >= 3002850) { //newer versions of fb app
                 urlFacebook = "fb://facewebmodal/f?href=" + AboutUsConfig.LINK_FACEBOOK;
@@ -123,6 +129,7 @@ public class GlobalFunction {
 
     public static void callPhoneNumber(Activity activity) {
         try {
+            //if not granted
             if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE}, 101);
                 return;
@@ -141,11 +148,11 @@ public class GlobalFunction {
     }
 
     public static String getTextSearch(String input) {
-        String nfdNormalizedString = Normalizer.normalize(input, Normalizer.Form.NFD);
-        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-        return pattern.matcher(nfdNormalizedString).replaceAll("");
+        String nfdNormalizedString = Normalizer.normalize(input, Normalizer.Form.NFD);//normalize
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");//pattern to find all characters
+        return pattern.matcher(nfdNormalizedString).replaceAll("");//replace new normalize string
     }
-
+    //context -> action to perform -> position in the playlist
     public static void startMusicService(Context ctx, int action, int songPosition) {
         Intent musicService = new Intent(ctx, MusicService.class);
         musicService.putExtra(Constant.MUSIC_ACTION, action);

@@ -30,7 +30,7 @@ public class AdminArtistAdapter extends RecyclerView.Adapter<AdminArtistAdapter.
                 parent, false);
         return new AdminArtistViewHolder(binding);
     }
-
+    //ViewHolder -> ViewBinding -> reuse old view
     @Override
     public void onBindViewHolder(@NonNull AdminArtistViewHolder holder, int position) {
         Artist artist = mListArtist.get(position);

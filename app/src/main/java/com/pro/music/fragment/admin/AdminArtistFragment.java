@@ -34,7 +34,7 @@ import com.pro.music.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// list of Artists -> CRUD Find
 public class AdminArtistFragment extends Fragment {
 
     private FragmentAdminArtistBinding binding;
@@ -46,8 +46,8 @@ public class AdminArtistFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentAdminArtistBinding.inflate(inflater, container, false);
-        initView();
-        initListener();
+        initView(); //main interface
+        initListener(); //main listener -> handle logic
         loadListArtist("");
 
 
@@ -57,24 +57,24 @@ public class AdminArtistFragment extends Fragment {
     private void initView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         binding.rcvArtist.setLayoutManager(linearLayoutManager);
-        mListArtist = new ArrayList<>();
+        mListArtist = new ArrayList<>(); // list to store
         mAdminArtistAdapter = new AdminArtistAdapter(mListArtist, new IOnAdminManagerArtistListener() {
             @Override
             public void onClickUpdateArtist(Artist artist) {
                 onClickEditArtist(artist);
-            }
+            } //update
 
             @Override
             public void onClickDeleteArtist(Artist artist) {
                 deleteArtistItem(artist);
-            }
+            } //delete
 
             @Override
             public void onClickDetailArtist(Artist artist) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constant.KEY_INTENT_ARTIST_OBJECT, artist);
                 GlobalFunction.startActivity(getActivity(), AdminArtistSongActivity.class, bundle);
-            }
+            }//detail
         });
         binding.rcvArtist.setAdapter(mAdminArtistAdapter);
         binding.rcvArtist.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -87,11 +87,11 @@ public class AdminArtistFragment extends Fragment {
                 }
                 super.onScrolled(recyclerView, dx, dy);
             }
-        });
+        });//hide and show the button add when scrolling
     }
 
     private void initListener() {
-        binding.btnAddArtist.setOnClickListener(v -> onClickAddArtist());
+        binding.btnAddArtist.setOnClickListener(v -> onClickAddArtist()); //change screen
 
         binding.imgSearch.setOnClickListener(view1 -> searchArtist());
 
@@ -102,7 +102,7 @@ public class AdminArtistFragment extends Fragment {
             }
             return false;
         });
-
+        //Searching
         binding.edtSearchName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -128,8 +128,8 @@ public class AdminArtistFragment extends Fragment {
 
     private void onClickEditArtist(Artist artist) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.KEY_INTENT_ARTIST_OBJECT, artist);
-        GlobalFunction.startActivity(getActivity(), AdminAddArtistActivity.class, bundle);
+        bundle.putSerializable(Constant.KEY_INTENT_ARTIST_OBJECT, artist); //transfer artist object
+        GlobalFunction.startActivity(getActivity(), AdminAddArtistActivity.class, bundle); //start activity
     }
 
     private void deleteArtistItem(Artist artist) {
@@ -151,11 +151,11 @@ public class AdminArtistFragment extends Fragment {
     private void searchArtist() {
         String strKey = binding.edtSearchName.getText().toString().trim();
         resetListArtist();
-        if (getActivity() != null) {
+        if (getActivity() != null) { //avoid listening again
             MyApplication.get(getActivity()).getArtistDatabaseReference()
-                    .removeEventListener(mChildEventListener);
+                    .removeEventListener(mChildEventListener);//remove old list and listener
         }
-        loadListArtist(strKey);
+        loadListArtist(strKey);//load from firebase
         GlobalFunction.hideSoftKeyboard(getActivity());
     }
 
@@ -166,7 +166,7 @@ public class AdminArtistFragment extends Fragment {
             mListArtist = new ArrayList<>();
         }
     }
-
+    //listen to event and load data to list by keyword
     public void loadListArtist(String keyword) {
         if (getActivity() == null) return;
         mChildEventListener = new ChildEventListener() {
@@ -214,10 +214,11 @@ public class AdminArtistFragment extends Fragment {
                 if (mAdminArtistAdapter != null) mAdminArtistAdapter.notifyDataSetChanged();
             }
 
+            //No code
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
             }
-
+            //No code
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }

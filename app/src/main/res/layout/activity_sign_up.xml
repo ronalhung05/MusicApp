@@ -57,21 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/define_dimen_20"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rdb_admin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/admin" />
-
-            <RadioButton
-                android:id="@+id/rdb_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/define_dimen_20"
-                android:text="@string/user" />
-        </RadioGroup>
+            android:orientation="horizontal"/>
 
         <Button
             android:id="@+id/btn_sign_up"

@@ -18,12 +18,12 @@ public class AdminMainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityAdminMainBinding = ActivityAdminMainBinding.inflate(getLayoutInflater());
-        setContentView(mActivityAdminMainBinding.getRoot());
+        mActivityAdminMainBinding = ActivityAdminMainBinding.inflate(getLayoutInflater()); //Link to layout
+        setContentView(mActivityAdminMainBinding.getRoot()); //Set the Main Interface = Root View
 
         setToolBar();
 
-        mActivityAdminMainBinding.viewpager2.setUserInputEnabled(false);
+        mActivityAdminMainBinding.viewpager2.setUserInputEnabled(false); //Scroll vertically
         mActivityAdminMainBinding.viewpager2.setOffscreenPageLimit(5);
         AdminViewPagerAdapter adminViewPagerAdapter = new AdminViewPagerAdapter(this);
         mActivityAdminMainBinding.viewpager2.setAdapter(adminViewPagerAdapter);

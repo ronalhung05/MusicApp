@@ -7,11 +7,11 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.pro.music.model.User;
 import com.pro.music.utils.StringUtil;
-
+//Json user - manage user info - SESSION
 public class DataStoreManager {
 
     public static final String PREF_USER_INFOR = "PREF_USER_INFOR";
-
+    //Singleton -> ensure only one instance in app
     private static DataStoreManager instance;
     private MySharedPreferences sharedPreferences;
 

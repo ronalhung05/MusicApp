@@ -27,9 +27,9 @@ public class AdminAddArtistActivity extends BaseActivity {
         binding = ActivityAdminAddArtistBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loadDataIntent();
-        initToolbar();
-        initView();
+        loadDataIntent(); //load to know if new or existing artist
+        initToolbar(); //tool bar
+        initView(); //view based on the flag
 
         binding.btnAddOrEdit.setOnClickListener(v -> addOrEditArtist());
     }
@@ -38,7 +38,7 @@ public class AdminAddArtistActivity extends BaseActivity {
         Bundle bundleReceived = getIntent().getExtras();
         if (bundleReceived != null) {
             isUpdate = true;
-            mArtist = (Artist) bundleReceived.get(Constant.KEY_INTENT_ARTIST_OBJECT);
+            mArtist = (Artist) bundleReceived.get(Constant.KEY_INTENT_ARTIST_OBJECT);//get from the constant
         }
     }
 
@@ -47,7 +47,7 @@ public class AdminAddArtistActivity extends BaseActivity {
         binding.toolbar.layoutPlayAll.setVisibility(View.GONE);
         binding.toolbar.imgLeft.setOnClickListener(v -> onBackPressed());
     }
-
+    //update hay
     private void initView() {
         if (isUpdate) {
             binding.toolbar.tvTitle.setText(getString(R.string.label_update_artist));
@@ -78,23 +78,25 @@ public class AdminAddArtistActivity extends BaseActivity {
         // Update artist
         if (isUpdate) {
             showProgressDialog(true);
-            Map<String, Object> map = new HashMap<>();
+            Map<String, Object> map = new HashMap<>(); //json file
             map.put("name", strName);
             map.put("image", strImage);
-
+            //update in firebase
             MyApplication.get(this).getArtistDatabaseReference()
                     .child(String.valueOf(mArtist.getId())).updateChildren(map, (error, ref) -> {
-                showProgressDialog(false);
+                showProgressDialog(false); //hide after complete
                 Toast.makeText(AdminAddArtistActivity.this,
                         getString(R.string.msg_edit_artist_success), Toast.LENGTH_SHORT).show();
                 GlobalFunction.hideSoftKeyboard(this);
             });
+            //.child -> point to node child in FB ased on ID
+            //.updateChildren -> update from map only -> callback (error, ref) -> show error
             return;
         }
 
         // Add artist
         showProgressDialog(true);
-        long artistId = System.currentTimeMillis();
+        long artistId = System.currentTimeMillis(); //get ID based on time with milisecond
         Artist artist = new Artist(artistId, strName, strImage);
         MyApplication.get(this).getArtistDatabaseReference()
                 .child(String.valueOf(artistId)).setValue(artist, (error, ref) -> {
@@ -103,6 +105,6 @@ public class AdminAddArtistActivity extends BaseActivity {
             binding.edtImage.setText("");
             GlobalFunction.hideSoftKeyboard(this);
             Toast.makeText(this, getString(R.string.msg_add_artist_success), Toast.LENGTH_SHORT).show();
-        });
+        });//add and rest value
     }
 }
