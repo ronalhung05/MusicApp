@@ -18,7 +18,7 @@ import com.pro.music.databinding.ActivityPlayMusicBinding;
 import com.pro.music.model.Song;
 import com.pro.music.prefs.DataStoreManager;
 import com.pro.music.service.MusicService;
-
+//Base Activity -> AppCompactActivity -> FragmentActivity
 public class PlayMusicActivity extends BaseActivity {
 
     private static final int REQUEST_PERMISSION_CODE = 10;
@@ -42,6 +42,7 @@ public class PlayMusicActivity extends BaseActivity {
         mActivityPlayMusicBinding.toolbar.imgLeft.setOnClickListener(v -> onBackPressed());
     }
 
+    //still play music when going out
     @Override
     public void onBackPressed() {
         if (DataStoreManager.getUser().isAdmin()) {
@@ -54,8 +55,8 @@ public class PlayMusicActivity extends BaseActivity {
     private void initUI() {
         MusicViewPagerAdapter musicViewPagerAdapter = new MusicViewPagerAdapter(this);
         mActivityPlayMusicBinding.viewpager2.setAdapter(musicViewPagerAdapter);
-        mActivityPlayMusicBinding.indicator3.setViewPager(mActivityPlayMusicBinding.viewpager2);
-        mActivityPlayMusicBinding.viewpager2.setCurrentItem(1);
+        mActivityPlayMusicBinding.indicator3.setViewPager(mActivityPlayMusicBinding.viewpager2); //indicator event
+        mActivityPlayMusicBinding.viewpager2.setCurrentItem(1); //second page
     }
 
     public void downloadSong(Song song) {
@@ -67,7 +68,7 @@ public class PlayMusicActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 String[] permission = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                requestPermissions(permission, REQUEST_PERMISSION_CODE);
+                requestPermissions(permission, REQUEST_PERMISSION_CODE); //call the onRequestPermissionResult
             } else {
                 GlobalFunction.startDownloadFile(this, mSong);
             }
@@ -76,7 +77,8 @@ public class PlayMusicActivity extends BaseActivity {
         }
     }
 
-    @SuppressLint("MissingSuperCall")
+    //checkPermission -> onRequestPermissionResult -> grant ot not grant
+    @SuppressLint("MissingSuperCall") //turn off IDE notification
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {

@@ -7,17 +7,17 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.pro.music.fragment.ListSongPlayingFragment;
 import com.pro.music.fragment.PlaySongFragment;
-
+//manage 2 fragments for play music activity
 public class MusicViewPagerAdapter extends FragmentStateAdapter {
-
+    //fragmentActivity must be not null
     public MusicViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
-
-    @NonNull
+    //2 fragment -> song playlist and play song
+    @NonNull //this method always return non-null object -> ensure fragment not null
     @Override
     public Fragment createFragment(int position) {
-        if (position == 0) {
+        if (position == 0) { //first tab
             return new ListSongPlayingFragment();
         }
         return new PlaySongFragment();
@@ -25,6 +25,6 @@ public class MusicViewPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 2; //how many tabs
     }
 }

@@ -49,18 +49,18 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return null; //run start service -> not require bind
     }
 
     @Override
-    public void onCreate() {
+    public void onCreate() { //service background
         super.onCreate();
         if (mPlayer == null) {
             mPlayer = new MediaPlayer();
         }
     }
 
-    //receive action from intent
+    //receive action from
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Bundle bundle = intent.getExtras();
@@ -75,7 +75,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             handleActionMusic(mAction);
         }
 
-        return START_NOT_STICKY;
+        return START_NOT_STICKY; //don't start again when remove
     }
 
     //handle action music
@@ -154,10 +154,10 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             newPosition = getPositionPriority();
         } else {
             if (mListSongPlaying.size() > 1) {
-                if (isShuffle) { //if shuffle
+                if (isShuffle) {
                     newPosition = new Random().nextInt(mListSongPlaying.size());
                 } else {
-                    if (isRepeat) //if repeat
+                    if (isRepeat)
                         newPosition = mSongPosition;
                     else if (mSongPosition > 0) {
                         newPosition = mSongPosition - 1;
@@ -209,7 +209,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             }
             mPlayer.reset();
             mPlayer.setDataSource(songUrl);
-            mPlayer.prepareAsync();
+            mPlayer.prepareAsync(); //enhance UI -> prepare finish -> call callback onPrepared
             initControl();
         } catch (Exception e) {
             e.printStackTrace();
@@ -221,17 +221,19 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         mPlayer.setOnCompletionListener(this);
     }
 
+    //Manage music through notification
     private void sendMusicNotification() {
         if (DataStoreManager.getUser().isAdmin()) return;
 
         Song song = mListSongPlaying.get(mSongPosition);
-
-        int pendingFlag = PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT;
-        Intent intent = new Intent(this, MainActivity.class);
-        @SuppressLint("UnspecifiedImmutableFlag")
+        //Pending Intent -> Activity executed when user click on notification bar -> delay activity
+        //flag immutable -> no change in content of the intent -> Update_current -> update notification (no need to create new)
+        int pendingFlag = PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT; //delay when user click notification
+        Intent intent = new Intent(this, MainActivity.class); //click on notification -> main activity
+        @SuppressLint("UnspecifiedImmutableFlag") //avoid warning message
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, pendingFlag);
 
-        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.layout_push_notification_music);
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.layout_push_notification_music); //custom notification layout
         remoteViews.setTextViewText(R.id.tv_song_name, song.getTitle());
 
         // Set listener
@@ -257,6 +259,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             builder.setCustomContentView(remoteViews);
         }
 
+        //display notification with foreground service
         Notification notification = builder.build();
         if (Build.VERSION.SDK_INT >= 34) {
             startForeground(1, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
@@ -264,7 +267,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             startForeground(1, notification);
         }
     }
-    //playlist management
+
     public static void clearListSongPlaying() {
         if (mListSongPlaying != null) {
             mListSongPlaying.clear();
@@ -322,13 +325,14 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             }
         }
     }
-    //play then next one when finish
+
     @Override
     public void onCompletion(MediaPlayer mp) {
         mAction = Constant.NEXT;
         nextSong();
     }
-    //starts playback when the MediaPlayer is ready
+
+    //after preparing  -> Media player call thihs callback
     @Override
     public void onPrepared(MediaPlayer mp) {
         mLengthSong = mPlayer.getDuration();
@@ -340,6 +344,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         changeCountViewSong();
     }
 
+    //change -> update
     private void sendBroadcastChangeListener() {
         Intent intent = new Intent(Constant.CHANGE_LISTENER);
         intent.putExtra(Constant.MUSIC_ACTION, mAction);

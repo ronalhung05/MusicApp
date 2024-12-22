@@ -41,6 +41,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
     private FragmentPlaySongBinding mFragmentPlaySongBinding;
     private Timer mTimer;
     private int mAction;
+    //receive from music service and process after
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -53,7 +54,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentPlaySongBinding = FragmentPlaySongBinding.inflate(inflater, container, false);
-
+        //listen to any change to music playing tab
         if (getActivity() != null) {
             LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mBroadcastReceiver,
                     new IntentFilter(Constant.CHANGE_LISTENER));
@@ -77,7 +78,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
         mFragmentPlaySongBinding.imgPlay.setOnClickListener(this);
         mFragmentPlaySongBinding.imgNext.setOnClickListener(this);
         mFragmentPlaySongBinding.imgDownload.setOnClickListener(this);
-
+        //?
         mFragmentPlaySongBinding.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -102,7 +103,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
         mFragmentPlaySongBinding.tvSongName.setText(currentSong.getTitle());
         mFragmentPlaySongBinding.tvArtist.setText(currentSong.getArtist());
         GlideUtils.loadUrl(currentSong.getImage(), mFragmentPlaySongBinding.imgSong);
-        if (DataStoreManager.getUser().isAdmin()) {
+        if (DataStoreManager.getUser().isAdmin()) { //view for admin
             mFragmentPlaySongBinding.layoutCountView.setVisibility(View.GONE);
             mFragmentPlaySongBinding.imgDownload.setVisibility(View.GONE);
             mFragmentPlaySongBinding.imgFavorite.setVisibility(View.GONE);
@@ -163,6 +164,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
                 mFragmentPlaySongBinding.imgSong.animate().rotationBy(360).withEndAction(this).setDuration(15000)
                         .setInterpolator(new LinearInterpolator()).start();
             }
+            //Interpolator -> attribute of animation -> linear = stable speed
         };
         mFragmentPlaySongBinding.imgSong.animate().rotationBy(360).withEndAction(runnable).setDuration(15000)
                 .setInterpolator(new LinearInterpolator()).start();
@@ -186,10 +188,11 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
                     mFragmentPlaySongBinding.tvTimeCurrent.setText(AppUtil.getTime(MusicService.mPlayer.getCurrentPosition()));
                     mFragmentPlaySongBinding.tvTimeMax.setText(AppUtil.getTime(MusicService.mLengthSong));
                     mFragmentPlaySongBinding.seekbar.setMax(MusicService.mLengthSong);
-                    mFragmentPlaySongBinding.seekbar.setProgress(MusicService.mPlayer.getCurrentPosition());
+                    mFragmentPlaySongBinding.seekbar.setProgress(MusicService.mPlayer.getCurrentPosition()); //current seekbar status
                 });
             }
-        }, 0, 1000);
+        }, 0, 1000); // do right away and run every 1s -> update seekbar after 1 sec
+        //mTimer on background thread -> runOnUiThread on main thread
     }
 
     private void showStatusButtonPlay() {
@@ -287,11 +290,12 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
     private void listenerCountViewSong(long songId) {
         if (getActivity() == null) return;
         ValueEventListener countViewSongEventListener = new ValueEventListener() {
+            //data snapshot -> firebase -> read only
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Integer currentCount = snapshot.getValue(Integer.class);
+                Integer currentCount = snapshot.getValue(Integer.class); //getValue - Integer
                 if (currentCount != null) {
-                    mFragmentPlaySongBinding.tvCountView.setText(String.valueOf(currentCount));
+                    mFragmentPlaySongBinding.tvCountView.setText(String.valueOf(currentCount)); //setText - String
                 }
             }
 
@@ -299,6 +303,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         };
+        //preference song id -> get count
         MyApplication.get(getActivity()).getCountViewDatabaseReference(songId)
                 .addValueEventListener(countViewSongEventListener);
     }
@@ -311,12 +316,13 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Song song = snapshot.getValue(Song.class);
                         if (song == null) return;
-                        boolean isFavorite = GlobalFunction.isFavoriteSong(song);
+                        boolean isFavorite = GlobalFunction.isFavoriteSong(song); //check if favorite
                         if (isFavorite) {
                             mFragmentPlaySongBinding.imgFavorite.setImageResource(R.drawable.ic_favorite);
                         } else {
                             mFragmentPlaySongBinding.imgFavorite.setImageResource(R.drawable.ic_unfavorite);
                         }
+                        //click change favorite status
                         mFragmentPlaySongBinding.imgFavorite.setOnClickListener(
                                 view -> GlobalFunction.onClickFavoriteSong(getActivity(), song, !isFavorite)
                         );
@@ -328,6 +334,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
                 });
     }
 
+    //reference the activity of this fragment
     private void clickOnDownloadSong() {
         Song currentSong = MusicService.mListSongPlaying.get(MusicService.mSongPosition);
         PlayMusicActivity activity = (PlayMusicActivity) getActivity();

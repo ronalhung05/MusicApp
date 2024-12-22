@@ -25,7 +25,7 @@ import com.pro.music.databinding.FragmentListSongPlayingBinding;
 import com.pro.music.listener.IOnClickSongPlayingItemListener;
 import com.pro.music.model.Song;
 import com.pro.music.service.MusicService;
-
+// display playlist - remove - play the song on playlist
 public class ListSongPlayingFragment extends Fragment {
 
     private FragmentListSongPlayingBinding mFragmentListSongPlayingBinding;
@@ -42,6 +42,7 @@ public class ListSongPlayingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentListSongPlayingBinding = FragmentListSongPlayingBinding.inflate(inflater, container, false);
 
+        //register broad cast receiver -> listen to event (change_listener) (from music service
         if (getActivity() != null) {
             LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mBroadcastReceiver,
                     new IntentFilter(Constant.CHANGE_LISTENER));
@@ -50,7 +51,7 @@ public class ListSongPlayingFragment extends Fragment {
 
         return mFragmentListSongPlayingBinding.getRoot();
     }
-
+    //initialize playlist with event
     private void displayListSongPlaying() {
         if (getActivity() == null || MusicService.mListSongPlaying == null) {
             return;
@@ -58,6 +59,7 @@ public class ListSongPlayingFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mFragmentListSongPlayingBinding.rcvData.setLayoutManager(linearLayoutManager);
 
+        //playlist from MusicService - listener into adapter
         mSongPlayingAdapter = new SongPlayingAdapter(MusicService.mListSongPlaying,
                 new IOnClickSongPlayingItemListener() {
             @Override

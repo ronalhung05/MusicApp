@@ -14,10 +14,10 @@ import com.pro.music.model.Song;
 import com.pro.music.utils.GlideUtils;
 
 import java.util.List;
-
+//manage connection with recycler view
 public class SongPlayingAdapter extends RecyclerView.Adapter<SongPlayingAdapter.SongPlayingViewHolder> {
 
-    private final List<Song> mListSongs;
+    private final List<Song> mListSongs; //all songs in it
     public final IOnClickSongPlayingItemListener iOnClickSongPlayingItemListener;
 
     public SongPlayingAdapter(List<Song> mListSongs, IOnClickSongPlayingItemListener iOnClickSongPlayingItemListener) {
@@ -25,6 +25,7 @@ public class SongPlayingAdapter extends RecyclerView.Adapter<SongPlayingAdapter.
         this.iOnClickSongPlayingItemListener = iOnClickSongPlayingItemListener;
     }
 
+    //connect each item to xml ItemSongPlaying and create view holder
     @NonNull
     @Override
     public SongPlayingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +33,7 @@ public class SongPlayingAdapter extends RecyclerView.Adapter<SongPlayingAdapter.
         return new SongPlayingViewHolder(itemSongPlayingBinding);
     }
 
+    //display each info of a song
     @Override
     public void onBindViewHolder(@NonNull SongPlayingViewHolder holder, int position) {
         Song song = mListSongs.get(position);
