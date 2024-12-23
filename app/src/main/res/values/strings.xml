@@ -2,6 +2,7 @@
     <string name="app_name">Music Vip Java</string>
 
     <string name="menu_home">Home</string>
+    <string name="menu_premium">Premium</string>
     <string name="menu_category">Category</string>
     <string name="menu_artist">Artist</string>
 
@@ -70,9 +71,10 @@
 
     // Message
     <string name="msg_please_waiting">Please wait…</string>
-    <string name="msg_send_feedback_success">Send feedback successfully!</string>
     <string name="msg_exit_app">Are you sure you want to exit?</string>
     <string name="msg_get_date_error">General error, please try again later</string>
+    <string name="msg_send_feedback_success">Send feedback success</string>
+    <string name="msg_upgrade_premium_success">Upgrade Premium Success!</string>
 
     // Module user
     <string name="hint_email">Email…</string>
@@ -148,4 +150,6 @@
     <string name="msg_delete_category_successfully">Delete category successfully</string>
     <string name="msg_delete_artist_successfully">Delete artist successfully</string>
     <string name="msg_delete_song_successfully">Delete song successfully</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
