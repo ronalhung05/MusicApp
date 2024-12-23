@@ -75,6 +75,17 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_small" />
 
+        <!-- Add Google Sign-In Button -->
+        <Button
+            android:id="@+id/btn_google_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_20"
+            android:background="@drawable/bg_main_corner_30"
+            android:text="@string/sign_in_with_google"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_small" />
+
         <TextView
             android:id="@+id/tv_forgot_password"
             android:layout_width="wrap_content"

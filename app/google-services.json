@@ -3,7 +3,7 @@
     "project_number": "570801791269",
     "firebase_url": "https://music-7b3aa-default-rtdb.firebaseio.com",
     "project_id": "music-7b3aa",
-    "storage_bucket": "music-7b3aa.appspot.com"
+    "storage_bucket": "music-7b3aa.firebasestorage.app"
   },
   "client": [
     {
@@ -13,7 +13,20 @@
           "package_name": "com.pro.music"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "570801791269-58r52ivrcod75ahsh32kmjnj3hmsb69u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pro.music",
+            "certificate_hash": "6039bdb3c7e3fe22ca69ef5c1e2c8eea05807e9a"
+          }
+        },
+        {
+          "client_id": "570801791269-k4l4o1175l27usc8i44lstr2o16b7330.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-HSYYEahq1Ywjfj0h_kW3DYJPjHwJk6w"
@@ -21,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570801791269-k4l4o1175l27usc8i44lstr2o16b7330.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -149,4 +149,7 @@
     <string name="msg_delete_category_successfully">Delete category successfully</string>
     <string name="msg_delete_artist_successfully">Delete artist successfully</string>
     <string name="msg_delete_song_successfully">Delete song successfully</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+
+    <string name="default_web_client_id">570801791269-k4l4o1175l27usc8i44lstr2o16b7330.apps.googleusercontent.com</string>
 </resources>

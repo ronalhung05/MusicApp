@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.pro.music.R;
 import com.pro.music.constant.Constant;
@@ -464,13 +466,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void onClickSignOut() {
-        FirebaseAuth.getInstance().signOut();
-        DataStoreManager.setUser(null);
-        // Stop service when user sign out
+        FirebaseAuth.getInstance().signOut(); // Đăng xuất Firebase
+        DataStoreManager.setUser(null); // Xóa thông tin người dùng lưu trữ
+
+        // Dừng dịch vụ nếu đang phát nhạc
         clickOnCloseButton();
-        GlobalFunction.startActivity(this, SignInActivity.class);
-        finishAffinity();
+
+        // Đăng xuất GoogleSignInClient
+        GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build())
+                .signOut().addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build())
+                                .revokeAccess().addOnCompleteListener(this, revokeTask -> {
+                                    Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                                    GlobalFunction.startActivity(this, SignInActivity.class);
+                                    finishAffinity(); // Đóng tất cả các Activity
+                                });
+                    } else {
+                        Toast.makeText(this, "Failed to log out", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
 
     public ActivityMainBinding getActivityMainBinding() {
         return mActivityMainBinding;
