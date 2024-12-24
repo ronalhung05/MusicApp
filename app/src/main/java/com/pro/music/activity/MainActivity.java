@@ -528,8 +528,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     public void downloadSong(Song song) {
-        mSong = song;
-        checkPermission();
+        if(DataStoreManager.getUser().isPremium()) {
+            mSong = song;
+            checkPermission();
+        }
+        else
+            Toast.makeText(this, getString(R.string.msg_cannot_download),
+                    Toast.LENGTH_SHORT).show();
     }
 
     private void checkPermission() {

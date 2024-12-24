@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -329,9 +330,14 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
     }
 
     private void clickOnDownloadSong() {
-        Song currentSong = MusicService.mListSongPlaying.get(MusicService.mSongPosition);
-        PlayMusicActivity activity = (PlayMusicActivity) getActivity();
-        if (activity == null) return;
-        activity.downloadSong(currentSong);
+        if(DataStoreManager.getUser().isPremium()) {
+            Song currentSong = MusicService.mListSongPlaying.get(MusicService.mSongPosition);
+            PlayMusicActivity activity = (PlayMusicActivity) getActivity();
+            if (activity == null) return;
+            activity.downloadSong(currentSong);
+        }
+        else {
+            GlobalFunction.showToastMessage(getActivity(), getString(R.string.msg_cannot_download));
+        }
     }
 }

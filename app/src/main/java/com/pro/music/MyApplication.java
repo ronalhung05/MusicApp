@@ -14,7 +14,7 @@ import com.pro.music.prefs.DataStoreManager;
 public class MyApplication extends Application {
 
     // Firebase url
-    public static final String FIREBASE_URL = "https://test-99430-default-rtdb.firebaseio.com";
+    public static final String FIREBASE_URL = "https://music-7b3aa-default-rtdb.firebaseio.com";
     public static final String CHANNEL_ID = "channel_music_basic_id";
     private static final String CHANNEL_NAME = "channel_music_basic_name";
     private FirebaseDatabase mFirebaseDatabase;

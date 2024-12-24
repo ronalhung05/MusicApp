@@ -137,6 +137,7 @@
     <string name="msg_sign_up_error">Registration failed, please try again</string>
     <string name="msg_sign_in_error">Login failed, please try again</string>
     <string name="msg_permission_denied">Permission Denied</string>
+    <string name="msg_cannot_download">You must upgrade to premium to be able to download</string>
     <string name="msg_add_song_playlist_success">Add song to playlist successfully</string>
     <string name="msg_song_exists_in_playlist">The song already exists in the playlist</string>
     <string name="msg_song_playing">The song is playing</string>
@@ -152,4 +153,6 @@
     <string name="msg_delete_song_successfully">Delete song successfully</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="msg_payment_error">Thanh toán lỗi, vui lòng thử lại !!!</string>
+    <string name="msg_payment_canceled">Thanh toán đã bị hủy. Vui lòng thử lại!!!</string>
 </resources>
