@@ -493,6 +493,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         return mActivityMainBinding;
     }
 
+    //deprecated -----
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() < 1) {

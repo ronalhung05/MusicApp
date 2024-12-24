@@ -100,6 +100,7 @@ public class SignInActivity extends BaseActivity {
         mActivitySignInBinding.tvForgotPassword.setOnClickListener(v -> onClickForgotPassword());
     }
 
+    //run and get the data from the activity
     private void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);

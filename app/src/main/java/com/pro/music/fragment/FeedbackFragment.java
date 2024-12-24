@@ -47,9 +47,17 @@ public class FeedbackFragment extends Fragment {
 
         if (StringUtil.isEmpty(strName)) {
             GlobalFunction.showToastMessage(activity, getString(R.string.name_require));
-        } else if (StringUtil.isEmpty(strComment)) {
+        } else if (strName.length() < 4) {
+            GlobalFunction.showToastMessage(activity, getString(R.string.name_minimum_length));
+        } else if (!StringUtil.isEmpty(strPhone) && !strPhone.matches("\\d{10,11}")) {
+            GlobalFunction.showToastMessage(activity, getString(R.string.phone_invalid)); // "Phone number must be 10-11 digits."
+        }
+        // Kiểm tra Comment lớn hơn 10 ký tự
+        else if (StringUtil.isEmpty(strComment)) {
             GlobalFunction.showToastMessage(activity, getString(R.string.comment_require));
-        } else {
+        } else if (strComment.length() < 10) {
+            GlobalFunction.showToastMessage(activity, getString(R.string.comment_minimum_length));
+        }  else {
             activity.showProgressDialog(true);
             Feedback feedback = new Feedback(strName, strPhone, strEmail, strComment);
             MyApplication.get(getActivity()).getFeedbackDatabaseReference()
@@ -58,6 +66,7 @@ public class FeedbackFragment extends Fragment {
                         activity.showProgressDialog(false);
                         sendFeedbackSuccess();
                     });
+            //new child with current time -> store with data (json) -> show error if have
         }
     }
 

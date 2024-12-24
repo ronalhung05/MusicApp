@@ -42,9 +42,12 @@ public class ContactFragment extends Fragment {
         mFragmentContactBinding.tvAboutUsTitle.setText(AboutUsConfig.ABOUT_US_TITLE);
         mFragmentContactBinding.tvAboutUsContent.setText(AboutUsConfig.ABOUT_US_CONTENT);
         mFragmentContactBinding.tvAboutUsWebsite.setText(AboutUsConfig.ABOUT_US_WEBSITE_TITLE);
-
+        //Adapter can't access the runtime permission so call it first
+        //Adapter should display the contact list -> don't do complex logic here
         mContactAdapter = new ContactAdapter(getActivity(), getListContact(),
                 () -> GlobalFunction.callPhoneNumber(getActivity()));
+
+        //configure recycler view - grid layout 3 columns - disable scrolling
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         mFragmentContactBinding.rcvData.setNestedScrollingEnabled(false);
         mFragmentContactBinding.rcvData.setFocusable(false);
@@ -52,6 +55,7 @@ public class ContactFragment extends Fragment {
         mFragmentContactBinding.rcvData.setAdapter(mContactAdapter);
     }
 
+    //click layout website - Action view - open an url or website
     private void initListener() {
         mFragmentContactBinding.layoutWebsite.setOnClickListener(view
                 -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(AboutUsConfig.WEBSITE))));

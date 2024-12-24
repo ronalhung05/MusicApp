@@ -18,10 +18,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     private Context context;
     private final List<Contact> listContact;
-    private final ICallPhone iCallPhone;
+    private final ICallPhone iCallPhone; //interface to call hotline
 
     public interface ICallPhone {
-        void onClickCallPhone();
+        void onClickCallPhone(); //call back
     }
 
     public ContactAdapter(Context context, List<Contact> listContact, ICallPhone iCallPhone) {
@@ -30,6 +30,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         this.iCallPhone = iCallPhone;
     }
 
+    //View holder for each item in recycler view
     @NonNull
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,6 +38,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         return new ContactViewHolder(itemContactBinding);
     }
 
+    //link the data with view holder - set image, text, click listener
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
         Contact contact = listContact.get(position);
@@ -108,6 +110,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         context = null;
     }
 
+    // store view for each item -> re use
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
 
         private final ItemContactBinding mItemContactBinding;

@@ -1,18 +1,18 @@
 package com.pro.music.constant;
 
 public interface AboutUsConfig {
-    String ABOUT_US_TITLE = "Music Vip App";
+    String ABOUT_US_TITLE = "Music App";
     String ABOUT_US_CONTENT = "A free music streaming for everyone " +
             "Enjoy unlimited music everytime, everywhere.";
     String ABOUT_US_SLOGAN = "Free music for everyone, everywhere.";
-    String ABOUT_US_WEBSITE_TITLE = "MusivMusic.com";
+    String ABOUT_US_WEBSITE_TITLE = "Music.com";
 
-    String PAGE_FACEBOOK = "fb://page/tincoder";
-    String LINK_FACEBOOK = "https://www.facebook.com/phi.hung.347704/";
-    String LINK_YOUTUBE = "https://www.youtube.com/channel/UCu3DXfXYgygIYXN8TduNcNQ";
-    String PHONE_NUMBER = "+8413627062";
+    String PAGE_FACEBOOK = "https://www.facebook.com/michael.427671/";
+    String LINK_FACEBOOK = "https://www.facebook.com/michael.427671/";
+    String LINK_YOUTUBE = "https://www.youtube.com/@H%C3%B9ngMichael-q1c";
+    String PHONE_NUMBER = "+84903091548";
     String GMAIL = "michaelhung31102003@gmail.com";
-    String SKYPE_ID = "dangtin29932";
-    String ZALO_LINK = "https://zalo.me/0813627062";
+    String SKYPE_ID = "hungphi3110";
+    String ZALO_LINK = "https://zalo.me/0903091548";
     String WEBSITE = "https://soundcloud.com/";
 }

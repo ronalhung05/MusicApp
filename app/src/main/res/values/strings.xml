@@ -152,4 +152,7 @@
     <string name="sign_in_with_google">Sign in with Google</string>
 
     <string name="default_web_client_id">570801791269-k4l4o1175l27usc8i44lstr2o16b7330.apps.googleusercontent.com</string>
+    <string name="name_minimum_length">"Name must be over 4 characters"</string>
+    <string name="comment_minimum_length">Comment must be over 10 chars</string>
+    <string name="phone_invalid">Phone Number must have 10-11 numbers</string>
 </resources>
