@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.pro.music.MyApplication;
 import com.pro.music.R;
 import com.pro.music.activity.AdminAddArtistActivity;
@@ -49,7 +50,6 @@ public class AdminArtistFragment extends Fragment {
         initView();
         initListener();
         loadListArtist("");
-
 
         return binding.getRoot();
     }
@@ -133,19 +133,45 @@ public class AdminArtistFragment extends Fragment {
     }
 
     private void deleteArtistItem(Artist artist) {
-        new AlertDialog.Builder(getActivity())
-                .setTitle(getString(R.string.msg_delete_title))
-                .setMessage(getString(R.string.msg_confirm_delete))
-                .setPositiveButton(getString(R.string.action_ok), (dialogInterface, i) -> {
-                    if (getActivity() == null) return;
-                    MyApplication.get(getActivity()).getArtistDatabaseReference()
-                            .child(String.valueOf(artist.getId())).removeValue((error, ref) ->
-                                    Toast.makeText(getActivity(),
-                                            getString(R.string.msg_delete_artist_successfully),
-                                            Toast.LENGTH_SHORT).show());
-                })
-                .setNegativeButton(getString(R.string.action_cancel), null)
-                .show();
+        if (getActivity() == null) return;
+
+        DatabaseReference songsRef = MyApplication.get(getActivity()).getSongsDatabaseReference();
+
+        songsRef.orderByChild("artistId").equalTo(artist.getId()).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        if (task.getResult().exists()) {
+                            Toast.makeText(getActivity(),
+                                    getString(R.string.msg_artist_has_songs),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle(getString(R.string.msg_delete_title))
+                                    .setMessage(getString(R.string.msg_confirm_delete))
+                                    .setPositiveButton(getString(R.string.action_ok), (dialogInterface, i) -> {
+                                        MyApplication.get(getActivity()).getArtistDatabaseReference()
+                                                .child(String.valueOf(artist.getId()))
+                                                .removeValue((error, ref) -> {
+                                                    if (error == null) {
+                                                        Toast.makeText(getActivity(),
+                                                                getString(R.string.msg_delete_artist_successfully),
+                                                                Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(getActivity(),
+                                                                getString(R.string.msg_delete_artist_failed),
+                                                                Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    })
+                                    .setNegativeButton(getString(R.string.action_cancel), null)
+                                    .show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(),
+                                getString(R.string.msg_check_artist_songs_error),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void searchArtist() {

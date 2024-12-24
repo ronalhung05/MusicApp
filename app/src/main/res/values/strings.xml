@@ -14,8 +14,10 @@
 
     <string name="menu_account">Account</string>
     <string name="menu_song">Song</string>
+    <string name="menu_staff">Staff</string>
 
     <string name="menu_change_password">Change password</string>
+    <string name="menu_staff_management">Staff management</string>
     <string name="menu_sign_out">Sign Out</string>
 
     <string name="label_facebook">Facebook</string>
@@ -62,6 +64,7 @@
     <string name="hint_search_name">Song name…</string>
     <string name="hint_search_category">Category name…</string>
     <string name="hint_search_artist">Artist name…</string>
+    <string name="hint_search_staff">Staff name…</string>
 
     // Label
     <string name="label_artist">Artist:</string>
@@ -81,6 +84,14 @@
     <string name="hint_password_new">New password…</string>
     <string name="hint_password_confirm">Confirm new password…</string>
 
+    <string name="msg_artist_has_songs">Can not delete artist has songs</string>
+    <string name="msg_check_artist_songs_error">Error while check song of artist</string>
+    <string name="msg_delete_artist_failed">Delete artist error</string>
+
+    <string name="msg_check_category_songs_error">Error while check song of category</string>
+    <string name="msg_delete_category_failed">Delete category error</string>
+    <string name="msg_category_has_songs">Can not delete category has songs</string>
+
     <string name="sign_up">Sign Up</string>
     <string name="have_account">Already have an account?</string>
     <string name="have_not_account">Don\'t have an account?</string>
@@ -94,12 +105,16 @@
 
     <string name="label_name">Name(*)</string>
     <string name="label_image">Image(*)</string>
+    <string name="label_email">Email(*)</string>
+    <string name="label_password">Password(*)</string>
     <string name="label_add_category">Add Category</string>
     <string name="label_update_category">Update Category</string>
     <string name="label_add_artist">Add Artist</string>
     <string name="label_update_artist">Update Artist</string>
     <string name="label_add_song">Add Song</string>
     <string name="label_update_song">Update Song</string>
+    <string name="label_update_staff">Update Staff</string>
+    <string name="label_add_staff">Add Staff</string>
 
     <string name="song_category">Category(*)</string>
     <string name="song_artist">Artist(*)</string>
@@ -109,6 +124,8 @@
     <string name="label_category">Category:</string>
 
     <string name="msg_name_require">Please enter the name</string>
+    <string name="msg_name_contain_number">The name can not contain number</string>
+    <string name="msg_name_contain_special_character">The name can not contain special character</string>
     <string name="msg_image_require">Please enter the image</string>
     <string name="msg_url_require">Please enter the url (.mp3)</string>
     <string name="msg_edit_category_success">Update category successfully</string>
@@ -117,6 +134,8 @@
     <string name="msg_add_artist_success">Add artist successfully</string>
     <string name="msg_edit_song_success">Update song successfully</string>
     <string name="msg_add_song_success">Add song successfully</string>
+    <string name="msg_add_staff_success">Add staff successfully</string>
+    <string name="msg_edit_staff_success">Update staff successfully</string>
 
     <string name="msg_email_require">Please enter your email</string>
     <string name="msg_password_require">Please enter your password</string>
@@ -143,9 +162,12 @@
     <string name="msg_delete_title">Confirm delete</string>
     <string name="msg_cannot_delete_song">Cannot delete currently playing song from playlist</string>
     <string name="msg_delete_song_from_playlist_success">Delete song from playlist successfully</string>
-    <string name="msg_email_invalid_admin">Email for administrator need to be in the format …@admin.com</string>
+    <string name="msg_email_invalid_admin">Email for administrator need to be in the format</string>
     <string name="msg_email_invalid_user">Wrong email format for user</string>
     <string name="msg_delete_category_successfully">Delete category successfully</string>
     <string name="msg_delete_artist_successfully">Delete artist successfully</string>
+    <string name="msg_delete_staff_successfully">Delete staff successfully</string>
     <string name="msg_delete_song_successfully">Delete song successfully</string>
+    <string name="msg_delete_auth_error">Error when delete staff</string>
+    <string name="msg_delete_staff_error">Error when delete staff</string>
 </resources>
