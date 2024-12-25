@@ -7,6 +7,7 @@ public class User {
     private String email;
     private String password;
     private boolean isAdmin;
+    private boolean isPremium;
 
     public User() {
     }
@@ -38,6 +39,14 @@ public class User {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public boolean isPremium() {
+        return isPremium;
+    }
+
+    public void setPremium(boolean premium) {
+        isPremium = premium;
     }
 
     public String toJSon() {

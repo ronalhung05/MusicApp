@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.circleindicator)
     implementation(libs.gson)
 
+    implementation(libs.paypal)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

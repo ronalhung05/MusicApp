@@ -57,6 +57,9 @@ public class MyApplication extends Application {
     public DatabaseReference getFeedbackDatabaseReference() {
         return mFirebaseDatabase.getReference("/feedback");
     }
+    public DatabaseReference getPremiumDatabaseReference() {
+        return mFirebaseDatabase.getReference("/premium");
+    }
 
     public DatabaseReference getStaffDatabaseReference(){
         return mFirebaseDatabase.getReference("/staff");

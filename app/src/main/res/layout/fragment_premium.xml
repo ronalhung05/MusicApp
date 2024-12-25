@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.PremiumFragment">
+
+    <!-- Title Section -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subscription Plans"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="20dp"
+        android:textColor="@color/black"/>
+
+    <!-- Free Plan Section -->
+    <LinearLayout
+        android:id="@+id/layout_free_plan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎵 Free Plan"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Limited song skips\n- Ads during playback\n- Standard sound quality"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+
+    <!-- Premium Plan Section -->
+    <LinearLayout
+        android:id="@+id/layout_premium_plan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_free_plan"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✨ Premium Plan"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Unlimited skips\n- No ads\n- High sound quality\n- Offline downloads"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+
+    <!-- Upgrade Button -->
+    <Button
+        android:id="@+id/btn_upgradePremium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upgrade to Premium"
+        android:textSize="18sp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white"/>
+</RelativeLayout>

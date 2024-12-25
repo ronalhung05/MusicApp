@@ -6,9 +6,17 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import androidx.annotation.NonNull;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.pro.music.MyApplication;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pro.music.MyApplication;
 import com.pro.music.R;
 import com.pro.music.constant.Constant;
@@ -146,6 +154,8 @@ public class SignInActivity extends BaseActivity {
     private void signInUser(String email, String password) {
         showProgressDialog(true);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        DatabaseReference premiumRef = FirebaseDatabase.getInstance().getReference("premium");
+
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     showProgressDialog(false);
@@ -156,13 +166,36 @@ public class SignInActivity extends BaseActivity {
                             if (user.getEmail() != null && user.getEmail().contains(Constant.ADMIN_EMAIL_FORMAT)) {
                                 userObject.setAdmin(true);
                             }
-
                             if (user.getEmail() != null && user.getEmail().contains(Constant.STAFF_EMAIL_FORMAT)) {
                                 userObject.setAdmin(true);
                             }
 
-                            DataStoreManager.setUser(userObject);
-                            goToMainActivity();
+                            premiumRef.orderByChild("email").equalTo(user.getEmail())
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+                                                // Lặp qua để tìm email (trường hợp có nhiều kết quả)
+                                                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                                                    Boolean isPremium = childSnapshot.child("premium").getValue(Boolean.class);
+                                                    userObject.setPremium(isPremium != null && isPremium);
+                                                    break;  // Chỉ cần lấy 1 giá trị
+                                                }
+                                            } else {
+                                                userObject.setPremium(false);
+                                            }
+
+                                            // Lưu vào SharedPreferences
+                                            DataStoreManager.setUser(userObject);
+                                            goToMainActivity();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Toast.makeText(SignInActivity.this, "Failed to fetch premium status", Toast.LENGTH_SHORT).show();
+                                            goToMainActivity();  // Vẫn cho vào nhưng với isPremium = false
+                                }
+                            });
                         }
                     } else {
                         Toast.makeText(SignInActivity.this, getString(R.string.msg_sign_in_error),
@@ -179,5 +212,4 @@ public class SignInActivity extends BaseActivity {
         }
         finishAffinity(); // Close all activities in the current task stack -> immediately close the app
     }
-
 }

@@ -22,10 +22,28 @@
             android:padding="@dimen/define_dimen_14"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="@dimen/define_dimen_50"
-                android:layout_height="@dimen/define_dimen_50"
-                android:src="@drawable/ic_avatar_default"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/define_dimen_14"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/define_dimen_50"
+                    android:layout_height="@dimen/define_dimen_50"
+                    android:src="@drawable/ic_avatar_default"/>
+
+                <ImageView
+                    android:id="@+id/img_premium"
+                    android:layout_marginStart="20dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/diamond_black"
+                    android:layout_marginEnd="10dp" />
+            </LinearLayout>
+
+
 
             <TextView
                 android:id="@+id/tv_user_email"

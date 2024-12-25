@@ -36,6 +36,7 @@ import com.pro.music.fragment.FavoriteFragment;
 import com.pro.music.fragment.FeedbackFragment;
 import com.pro.music.fragment.HomeFragment;
 import com.pro.music.fragment.PopularSongsFragment;
+import com.pro.music.fragment.PremiumFragment;
 import com.pro.music.fragment.SearchFragment;
 import com.pro.music.fragment.SongsByArtistFragment;
 import com.pro.music.fragment.SongsByCategoryFragment;
@@ -59,6 +60,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public static final int TYPE_FEEDBACK = 7;
     public static final int TYPE_CONTACT = 8;
     public static final int TYPE_CHANGE_PASSWORD = 9;
+    public static final int TYPE_PREMIUM = 11;
 
     private static final int REQUEST_PERMISSION_CODE = 10;
     private Song mSong;
@@ -85,9 +87,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 new IntentFilter(Constant.CHANGE_LISTENER));
         openHomeScreen();
         displayUserInformation();
+        displayUserPremiumStatus();
         initListener();
         displayLayoutBottom();
     }
+
+    private void displayUserPremiumStatus() {
+        User user = DataStoreManager.getUser();
+        if (user.isPremium()) {
+            // Người dùng là premium - Hiển thị diamond gold
+            mActivityMainBinding.menuLeft.imgPremium.setImageResource(R.drawable.diamond_gold);
+            mActivityMainBinding.menuLeft.imgPremium.setOnClickListener(v -> {
+                Toast.makeText(this, "You are already a premium member", Toast.LENGTH_SHORT).show();
+            });
+        } else {
+            // Người dùng không phải premium - Hiển thị diamond black và cho click
+            mActivityMainBinding.menuLeft.imgPremium.setImageResource(R.drawable.diamond_black);
+            mActivityMainBinding.menuLeft.imgPremium.setOnClickListener(v -> {
+                // Mở màn hình nâng cấp premium
+                mActivityMainBinding.drawerLayout.closeDrawer(GravityCompat.START);
+                openPremiumScreen();
+            });
+        }
+    }
+
 
     private void checkNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -108,6 +131,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (mTypeScreen) {
             case TYPE_HOME:
                 handleToolbarTitle(getString(R.string.app_name));
+                handleDisplayIconHeader(true);
+                handleDisplayButtonPlayAll(false);
+                break;
+
+            case TYPE_PREMIUM:
+                handleToolbarTitle(getString(R.string.menu_premium));
                 handleDisplayIconHeader(true);
                 handleDisplayButtonPlayAll(false);
                 break;
@@ -233,6 +262,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void openHomeScreen() {
         replaceFragment(new HomeFragment());
         mTypeScreen = TYPE_HOME;
+        initHeader();
+    }
+
+    private void openPremiumScreen() {
+        replaceFragment(PremiumFragment.newInstance(true));
+        mTypeScreen = TYPE_PREMIUM;
         initHeader();
     }
 
@@ -511,8 +546,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     public void downloadSong(Song song) {
-        mSong = song;
-        checkPermission();
+        if(DataStoreManager.getUser().isPremium()) {
+            mSong = song;
+            checkPermission();
+        }
+        else
+            Toast.makeText(this, getString(R.string.msg_cannot_download),
+                    Toast.LENGTH_SHORT).show();
     }
 
     private void checkPermission() {

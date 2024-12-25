@@ -14,6 +14,7 @@ circleimageview = "3.0.0"
 circleindicator = "2.1.6"
 dialogs = "0.9.6.0"
 gson = "2.10.1"
+paypal = "2.16.0"
 playServicesAuth = "21.3.0"
 
 [libraries]
@@ -32,6 +33,7 @@ material-dialogs = { group = "com.afollestad.material-dialogs", name = "core", v
 circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
 circleindicator = { group = "me.relex", name = "circleindicator", version.ref = "circleindicator" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+paypal = { group = "com.paypal.sdk", name = "paypal-android-sdk", version.ref = "paypal" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 
 [plugins]

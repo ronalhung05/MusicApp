@@ -72,6 +72,7 @@ public class SignUpActivity extends BaseActivity {
                             if (user.getEmail() != null && user.getEmail().contains(Constant.ADMIN_EMAIL_FORMAT)) {
                                 userObject.setAdmin(true);
                             }
+                            userObject.setPremium(false);
                             DataStoreManager.setUser(userObject);
                             goToMainActivity();
                         }
