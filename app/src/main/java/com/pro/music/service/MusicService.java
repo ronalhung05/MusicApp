@@ -109,7 +109,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
                 break;
         }
     }
-
+    //process on other thread - firebase
     private void playSong() {
         String songUrl = mListSongPlaying.get(mSongPosition).getUrl();
         if (!StringUtil.isEmpty(songUrl)) {
@@ -209,7 +209,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             }
             mPlayer.reset();
             mPlayer.setDataSource(songUrl);
-            mPlayer.prepareAsync(); //enhance UI -> prepare finish -> call callback onPrepared
+            mPlayer.prepareAsync(); //(other thread) - > enhance UI -> prepare finish -> call callback onPrepared
             initControl();
         } catch (Exception e) {
             e.printStackTrace();
