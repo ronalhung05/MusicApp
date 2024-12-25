@@ -44,6 +44,19 @@
         android:textSize="@dimen/text_size_small" />
 
     <TextView
+        android:id="@+id/tv_staff_management"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/define_dimen_14"
+        android:paddingBottom="@dimen/define_dimen_14"
+        android:text="@string/menu_staff_management"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
+        android:drawableLeft="@drawable/ic_menu_staff"
+        android:drawablePadding="@dimen/define_dimen_10"
+        android:textSize="@dimen/text_size_small" />
+
+    <TextView
         android:id="@+id/tv_sign_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

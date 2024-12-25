@@ -2,15 +2,20 @@ package com.pro.music.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.pro.music.MyApplication;
 import com.pro.music.R;
 import com.pro.music.constant.Constant;
 import com.pro.music.constant.GlobalFunction;
 import com.pro.music.databinding.ActivitySignInBinding;
+import com.pro.music.databinding.FragmentAdminAccountBinding;
+import com.pro.music.fragment.admin.AdminAccountFragment;
 import com.pro.music.model.User;
 import com.pro.music.prefs.DataStoreManager;
 import com.pro.music.utils.StringUtil;
@@ -113,6 +118,7 @@ public class SignInActivity extends BaseActivity {
     private void onClickValidateSignIn() {
         String strEmail = mActivitySignInBinding.edtEmail.getText().toString().trim();
         String strPassword = mActivitySignInBinding.edtPassword.getText().toString().trim();
+
         if (StringUtil.isEmpty(strEmail)) {
             Toast.makeText(SignInActivity.this, getString(R.string.msg_email_require), Toast.LENGTH_SHORT).show();
         } else if (StringUtil.isEmpty(strPassword)) {
@@ -121,7 +127,7 @@ public class SignInActivity extends BaseActivity {
             Toast.makeText(SignInActivity.this, getString(R.string.msg_email_invalid), Toast.LENGTH_SHORT).show();
         } else {
             if (mActivitySignInBinding.rdbAdmin.isChecked()) {
-                if (!strEmail.contains(Constant.ADMIN_EMAIL_FORMAT)) {
+                if (!strEmail.contains(Constant.ADMIN_EMAIL_FORMAT) && !strEmail.contains(Constant.STAFF_EMAIL_FORMAT)) {
                     Toast.makeText(SignInActivity.this, getString(R.string.msg_email_invalid_admin), Toast.LENGTH_SHORT).show();
                 } else {
                     signInUser(strEmail, strPassword);
@@ -129,7 +135,7 @@ public class SignInActivity extends BaseActivity {
                 return;
             }
 
-            if (strEmail.contains(Constant.ADMIN_EMAIL_FORMAT)) {
+            if (strEmail.contains(Constant.ADMIN_EMAIL_FORMAT) && !strEmail.contains(Constant.STAFF_EMAIL_FORMAT)) {
                 Toast.makeText(SignInActivity.this, getString(R.string.msg_email_invalid_user), Toast.LENGTH_SHORT).show();
             } else {
                 signInUser(strEmail, strPassword);
@@ -150,6 +156,11 @@ public class SignInActivity extends BaseActivity {
                             if (user.getEmail() != null && user.getEmail().contains(Constant.ADMIN_EMAIL_FORMAT)) {
                                 userObject.setAdmin(true);
                             }
+
+                            if (user.getEmail() != null && user.getEmail().contains(Constant.STAFF_EMAIL_FORMAT)) {
+                                userObject.setAdmin(true);
+                            }
+
                             DataStoreManager.setUser(userObject);
                             goToMainActivity();
                         }

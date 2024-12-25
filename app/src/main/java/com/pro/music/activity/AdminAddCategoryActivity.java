@@ -65,10 +65,7 @@ public class AdminAddCategoryActivity extends BaseActivity {
         String strName = binding.edtName.getText().toString().trim();
         String strImage = binding.edtImage.getText().toString().trim();
 
-        if (StringUtil.isEmpty(strName)) {
-            Toast.makeText(this, getString(R.string.msg_name_require), Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (!isValidName(strName)) return;
 
         if (StringUtil.isEmpty(strImage)) {
             Toast.makeText(this, getString(R.string.msg_image_require), Toast.LENGTH_SHORT).show();
@@ -104,5 +101,27 @@ public class AdminAddCategoryActivity extends BaseActivity {
             GlobalFunction.hideSoftKeyboard(this);
             Toast.makeText(this, getString(R.string.msg_add_category_success), Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private boolean isValidName(String name) {
+        if (StringUtil.isEmpty(name)) {
+            Toast.makeText(this, getString(R.string.msg_name_require), Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
+
+        if (StringUtil.isContainNumber(name)) {
+            Toast.makeText(this, getString(R.string.msg_name_contain_number), Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
+
+        if (StringUtil.isContainsSpecialCharacter(name)) {
+            Toast.makeText(this, getString(R.string.msg_name_contain_special_character), Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
+
+        return true;
     }
 }

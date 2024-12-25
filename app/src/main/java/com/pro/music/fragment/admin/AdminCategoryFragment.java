@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.pro.music.MyApplication;
 import com.pro.music.R;
 import com.pro.music.activity.AdminAddCategoryActivity;
@@ -133,22 +134,47 @@ public class AdminCategoryFragment extends Fragment {
     }
 
     private void deleteCategoryItem(Category category) {
-        new AlertDialog.Builder(getActivity())
-                .setTitle(getString(R.string.msg_delete_title))
-                .setMessage(getString(R.string.msg_confirm_delete))
-                .setPositiveButton(getString(R.string.action_ok), (dialogInterface, i) -> {
-                    if (getActivity() == null) {
-                        return;
+        if (getActivity() == null) return;
+
+        DatabaseReference productsRef = MyApplication.get(getActivity()).getSongsDatabaseReference();
+
+        productsRef.orderByChild("categoryId").equalTo(category.getId()).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        if (task.getResult().exists()) {
+                            Toast.makeText(getActivity(),
+                                    getString(R.string.msg_category_has_songs),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle(getString(R.string.msg_delete_title))
+                                    .setMessage(getString(R.string.msg_confirm_delete))
+                                    .setPositiveButton(getString(R.string.action_ok), (dialogInterface, i) -> {
+                                        MyApplication.get(getActivity()).getCategoryDatabaseReference()
+                                                .child(String.valueOf(category.getId()))
+                                                .removeValue((error, ref) -> {
+                                                    if (error == null) {
+                                                        Toast.makeText(getActivity(),
+                                                                getString(R.string.msg_delete_category_successfully),
+                                                                Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(getActivity(),
+                                                                getString(R.string.msg_delete_category_failed),
+                                                                Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    })
+                                    .setNegativeButton(getString(R.string.action_cancel), null)
+                                    .show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(),
+                                getString(R.string.msg_check_category_songs_error),
+                                Toast.LENGTH_SHORT).show();
                     }
-                    MyApplication.get(getActivity()).getCategoryDatabaseReference()
-                            .child(String.valueOf(category.getId())).removeValue((error, ref) ->
-                                    Toast.makeText(getActivity(),
-                                            getString(R.string.msg_delete_category_successfully),
-                                            Toast.LENGTH_SHORT).show());
-                })
-                .setNegativeButton(getString(R.string.action_cancel), null)
-                .show();
+                });
     }
+
 
     private void searchCategory() {
         String strKey = binding.edtSearchName.getText().toString().trim();

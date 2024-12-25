@@ -97,6 +97,14 @@
         <activity
             android:exported="false"
             android:name="com.pro.music.activity.AdminArtistSongActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.AdminStaffManagementActivity" />
+
+        <activity
+            android:exported="false"
+            android:name="com.pro.music.activity.AdminAddStaffActivity" />
     </application>
 
 </manifest>

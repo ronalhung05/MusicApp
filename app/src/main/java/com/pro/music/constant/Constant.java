@@ -25,7 +25,9 @@ public class Constant {
     public static final String IS_FROM_MENU_LEFT = "is_from_menu_left";
     public static final String KEY_INTENT_CATEGORY_OBJECT = "category_object";
     public static final String KEY_INTENT_ARTIST_OBJECT = "artist_object";
+    public static final String KEY_INTENT_STAFF_OBJECT = "staff_object";
     public static final String KEY_INTENT_SONG_OBJECT = "song_object";
 
     public static final String ADMIN_EMAIL_FORMAT = "@admin.com";
+    public static final String STAFF_EMAIL_FORMAT = "@staff.com";
 }
