@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.pro.music.constant.Constant;
 import com.pro.music.constant.GlobalFunction;
 
+//use only on notification
 public class MusicReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

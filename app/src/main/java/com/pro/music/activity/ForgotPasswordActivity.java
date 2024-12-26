@@ -42,7 +42,6 @@ public class ForgotPasswordActivity extends BaseActivity {
     private void resetPassword(String email) {
         showProgressDialog(true);
         FirebaseAuth auth = FirebaseAuth.getInstance();
-
         auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(task -> {
                     showProgressDialog(false);

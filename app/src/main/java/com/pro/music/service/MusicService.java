@@ -49,7 +49,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null; //run start service -> not require bind
+        return null; //run start service -> not use bind service
     }
 
     @Override
@@ -60,7 +60,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         }
     }
 
-    //receive action from
+    //receive action from intent
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Bundle bundle = intent.getExtras();
