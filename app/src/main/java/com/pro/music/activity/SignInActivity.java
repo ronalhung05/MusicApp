@@ -83,6 +83,7 @@ public class SignInActivity extends BaseActivity {
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        DatabaseReference premiumRef = FirebaseDatabase.getInstance().getReference("premium");
         FirebaseAuth.getInstance().signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -90,8 +91,32 @@ public class SignInActivity extends BaseActivity {
                         if (user != null) {
                             // Lưu thông tin người dùng
                             User userObject = new User(user.getEmail(), "");
-                            DataStoreManager.setUser(userObject);
-                            goToMainActivity();
+                            premiumRef.orderByChild("email").equalTo(user.getEmail())
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+                                                // Lặp qua để tìm email (trường hợp có nhiều kết quả)
+                                                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                                                    Boolean isPremium = childSnapshot.child("premium").getValue(Boolean.class);
+                                                    userObject.setPremium(isPremium != null && isPremium);
+                                                    break;  // Chỉ cần lấy 1 giá trị
+                                                }
+                                            } else {
+                                                userObject.setPremium(false);
+                                            }
+
+                                            // Lưu vào SharedPreferences
+                                            DataStoreManager.setUser(userObject);
+                                            goToMainActivity();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Toast.makeText(SignInActivity.this, "Failed to fetch premium status", Toast.LENGTH_SHORT).show();
+                                            goToMainActivity();  // Vẫn cho vào nhưng với isPremium = false
+                                        }
+                                    });
                         }
                     } else {
                         // Xử lý lỗi chi tiết
