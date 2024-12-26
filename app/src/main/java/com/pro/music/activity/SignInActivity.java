@@ -64,7 +64,7 @@ public class SignInActivity extends BaseActivity {
                 return;
             }
 
-            if (strEmail.contains(Constant.ADMIN_EMAIL_FORMAT) && !strEmail.contains(Constant.STAFF_EMAIL_FORMAT)) {
+            if (strEmail.contains(Constant.ADMIN_EMAIL_FORMAT) || strEmail.contains(Constant.STAFF_EMAIL_FORMAT)) {
                 Toast.makeText(SignInActivity.this, getString(R.string.msg_email_invalid_user), Toast.LENGTH_SHORT).show();
             } else {
                 signInUser(strEmail, strPassword);
@@ -82,11 +82,7 @@ public class SignInActivity extends BaseActivity {
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         if (user != null) {
                             User userObject = new User(user.getEmail(), password);
-                            if (user.getEmail() != null && user.getEmail().contains(Constant.ADMIN_EMAIL_FORMAT)) {
-                                userObject.setAdmin(true);
-                            }
-
-                            if (user.getEmail() != null && user.getEmail().contains(Constant.STAFF_EMAIL_FORMAT)) {
+                            if (user.getEmail() != null && (user.getEmail().contains(Constant.ADMIN_EMAIL_FORMAT) || user.getEmail().contains(Constant.STAFF_EMAIL_FORMAT))) {
                                 userObject.setAdmin(true);
                             }
 

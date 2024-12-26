@@ -14,23 +14,28 @@ import com.pro.music.databinding.ActivitySplashBinding;
 import com.pro.music.prefs.DataStoreManager;
 import com.pro.music.utils.StringUtil;
 
+// Bypass android warning cause using splash screen
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 
     private ActivitySplashBinding mActivitySplashBinding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Reject title of activity to use full screen
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        // Set flag to reject status bar to use full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         mActivitySplashBinding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(mActivitySplashBinding.getRoot());
 
         initUi();
 
+        // Allow to run a code after a delay
         Handler handler = new Handler();
         handler.postDelayed(this::goToActivity, 2000);
     }
