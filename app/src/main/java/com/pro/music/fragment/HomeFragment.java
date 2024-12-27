@@ -226,7 +226,7 @@ public class HomeFragment extends Fragment {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 mHandlerBanner.removeCallbacks(mRunnableBanner);
-                mHandlerBanner.postDelayed(mRunnableBanner, 3000);
+                mHandlerBanner.postDelayed(mRunnableBanner, 3000);//time for banner
             }
         });
     }

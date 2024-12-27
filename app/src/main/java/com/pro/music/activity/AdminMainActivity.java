@@ -23,11 +23,11 @@ public class AdminMainActivity extends BaseActivity {
 
         setToolBar();
 
-        mActivityAdminMainBinding.viewpager2.setUserInputEnabled(false); //Scroll vertically
+        mActivityAdminMainBinding.viewpager2.setUserInputEnabled(true); //Scroll vertically
         mActivityAdminMainBinding.viewpager2.setOffscreenPageLimit(5);
         AdminViewPagerAdapter adminViewPagerAdapter = new AdminViewPagerAdapter(this);
         mActivityAdminMainBinding.viewpager2.setAdapter(adminViewPagerAdapter);
-
+        //keo trang -> nut doi
         mActivityAdminMainBinding.viewpager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -55,7 +55,7 @@ public class AdminMainActivity extends BaseActivity {
                 }
             }
         });
-
+        //nut doi -> keo trang
         mActivityAdminMainBinding.bottomNavigation.setOnNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_category) {

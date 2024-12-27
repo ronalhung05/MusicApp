@@ -83,11 +83,12 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
         mFragmentPlaySongBinding.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                MusicService.mPlayer.seekTo(seekBar.getProgress());
+                MusicService.mPlayer.seekTo(seekBar.getProgress()); //move to progress
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                // khong xu ly
             }
 
             @Override
@@ -176,6 +177,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
     }
 
     public void showSeekBar() {
+        //shedule -> len lich
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -186,6 +188,7 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
                     if (MusicService.mPlayer == null) {
                         return;
                     }
+                    //thoi gian hien tai mili
                     mFragmentPlaySongBinding.tvTimeCurrent.setText(AppUtil.getTime(MusicService.mPlayer.getCurrentPosition()));
                     mFragmentPlaySongBinding.tvTimeMax.setText(AppUtil.getTime(MusicService.mLengthSong));
                     mFragmentPlaySongBinding.seekbar.setMax(MusicService.mLengthSong);
@@ -198,9 +201,9 @@ public class PlaySongFragment extends Fragment implements View.OnClickListener {
 
     private void showStatusButtonPlay() {
         if (MusicService.isPlaying) {
-            mFragmentPlaySongBinding.imgPlay.setImageResource(R.drawable.ic_pause_black);
+            mFragmentPlaySongBinding.imgPlay.setImageResource(R.drawable.ic_pause_black); //dang play
         } else {
-            mFragmentPlaySongBinding.imgPlay.setImageResource(R.drawable.ic_play_black);
+            mFragmentPlaySongBinding.imgPlay.setImageResource(R.drawable.ic_play_black); //dung
         }
     }
 

@@ -159,19 +159,19 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
                 } else {
                     if (isRepeat)
                         newPosition = mSongPosition;
-                    else if (mSongPosition > 0) {
+                    else if (mSongPosition > 0) { // if not top -> previous song
                         newPosition = mSongPosition - 1;
-                    } else {
+                    } else { // if top song -> last song
                         newPosition = mListSongPlaying.size() - 1;
                     }
                 }
-            } else {
+            } else { // only 1
                 newPosition = 0;
             }
         }
         mSongPosition = newPosition;
-        sendMusicNotification();
-        sendBroadcastChangeListener();
+        sendMusicNotification(); //update notification
+        sendBroadcastChangeListener(); // send broadcast let UI update
         playSong();
     }
 
@@ -182,6 +182,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         } else {
             if (mListSongPlaying.size() > 1) {
                 if (isShuffle) {
+                    // mot vi tri ngau nhien trong danh sach bai hat
                     newPosition = new Random().nextInt(mListSongPlaying.size());
                 } else {
                     if (isRepeat)
@@ -205,11 +206,11 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     public void playMediaPlayer(String songUrl) {
         try {
             if (mPlayer.isPlaying()) {
-                mPlayer.stop();
+                mPlayer.stop(); // pause other playing song
             }
             mPlayer.reset();
             mPlayer.setDataSource(songUrl);
-            mPlayer.prepareAsync(); //(other thread) - > enhance UI -> prepare finish -> call callback onPrepared
+            mPlayer.prepareAsync(); //(other thread) -> don't touch UI -> prepare finish -> call callback onPrepared
             initControl();
         } catch (Exception e) {
             e.printStackTrace();
@@ -319,7 +320,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             if (songId == song.getId()) {
                 mListSongPlaying.remove(song);
                 if (mSongPosition > songPosition) {
-                    mSongPosition = mSongPosition - 1;
+                    mSongPosition = mSongPosition - 1; //if removed song stand before playing song -=1 -> to play
                 }
                 break;
             }

@@ -152,12 +152,12 @@ public class GlobalFunction {
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");//pattern to find all characters
         return pattern.matcher(nfdNormalizedString).replaceAll("");//replace new normalize string
     }
-    //context -> action to perform -> position in the playlist
+    //context (truy cap tai nguyen) -> action to perform -> position in the playlist
     public static void startMusicService(Context ctx, int action, int songPosition) {
         Intent musicService = new Intent(ctx, MusicService.class);
         musicService.putExtra(Constant.MUSIC_ACTION, action);
         musicService.putExtra(Constant.SONG_POSITION, songPosition);
-        ctx.startService(musicService);
+        ctx.startService(musicService);//khoi dong service -> dung khi stopSelf() hoac stopService()
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")

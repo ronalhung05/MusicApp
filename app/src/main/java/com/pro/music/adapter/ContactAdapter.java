@@ -30,7 +30,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         this.iCallPhone = iCallPhone;
     }
 
-    //View holder for each item in recycler view
+    //View holder for each item in recycler view -> thanh phan giao dien tung item
     @NonNull
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

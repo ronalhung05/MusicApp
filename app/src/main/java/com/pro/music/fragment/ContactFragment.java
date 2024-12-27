@@ -43,7 +43,7 @@ public class ContactFragment extends Fragment {
         mFragmentContactBinding.tvAboutUsContent.setText(AboutUsConfig.ABOUT_US_CONTENT);
         mFragmentContactBinding.tvAboutUsWebsite.setText(AboutUsConfig.ABOUT_US_WEBSITE_TITLE);
         //Adapter can't access the runtime permission so call it first
-        //Adapter should display the contact list -> don't do complex logic here
+        //call phone request higher permission -> runtime
         mContactAdapter = new ContactAdapter(getActivity(), getListContact(),
                 () -> GlobalFunction.callPhoneNumber(getActivity()));
 
@@ -51,8 +51,8 @@ public class ContactFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         mFragmentContactBinding.rcvData.setNestedScrollingEnabled(false);
         mFragmentContactBinding.rcvData.setFocusable(false);
-        mFragmentContactBinding.rcvData.setLayoutManager(layoutManager);
-        mFragmentContactBinding.rcvData.setAdapter(mContactAdapter);
+        mFragmentContactBinding.rcvData.setLayoutManager(layoutManager); //1
+        mFragmentContactBinding.rcvData.setAdapter(mContactAdapter); //2
     }
 
     //click layout website - Action view - open an url or website
